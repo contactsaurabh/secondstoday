@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seconds Left in the Day</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Arial', sans-serif;
+        color: white;
+        transition: background 1s;
+        text-align: center;
+    }
+    #seconds {
+        font-size: 10vw;
+        font-weight: bold;
+    }
+    #tagline {
+        font-size: 3vw;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div id="seconds">0</div>
+<div id="tagline">Make every second count</div>
+
+<script>
+function updateSeconds() {
+    const now = new Date();
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999);
+    const secondsLeft = Math.floor((endOfDay - now) / 1000);
+    document.getElementById('seconds').textContent = secondsLeft.toLocaleString();
+
+    // Optional: background gradient changes based on time
+    const hour = now.getHours();
+    if(hour < 6) document.body.style.background = '#0d1b2a';       // Night
+    else if(hour < 12) document.body.style.background = '#1b263b';  // Morning
+    else if(hour < 18) document.body.style.background = '#415a77';  // Afternoon
+    else document.body.style.background = '#778da9';                // Evening
+}
+
+setInterval(updateSeconds, 1000);
+updateSeconds();
+</script>
+</body>
+</html>
